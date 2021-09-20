@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using YouControler.WebAPI.Model;
@@ -18,6 +19,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult<IEnumerable<NivelAcesso>>> GetAllNivelAcesso()
         {
             var products = await _nivelAcessoRepository.GetAllNivelAcesso();
@@ -25,6 +27,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult<IEnumerable<NivelAcesso>>> GetNivelAcessoById(int id)
         {
             var product = await _nivelAcessoRepository.GetNivelAcessoById(id);
@@ -32,6 +35,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult> AddNivelAcesso([FromBody] NivelAcesso entity)
         {
             await _nivelAcessoRepository.AddNivelAcesso(entity);
@@ -39,6 +43,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult<Usuario>> UpdateNivelAcesso([FromBody] NivelAcesso entity)
         {
             await _nivelAcessoRepository.UpdateNivelAcesso(entity);
@@ -46,6 +51,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrador")]
         public async Task<ActionResult> RemoveNivelAcesso(int id)
         {
             await _nivelAcessoRepository.RemoveNivelAcesso(id);

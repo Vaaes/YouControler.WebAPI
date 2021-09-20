@@ -76,3 +76,10 @@ C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\ob
 C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\obj\Debug\net5.0\ref\YouControler.WebAPI.dll
 C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\obj\Debug\net5.0\YouControler.WebAPI.pdb
 C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\obj\Debug\net5.0\YouControler.WebAPI.genruntimeconfig.cache
+C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Cliente\source\repos\TCC\API\YouControler.WebAPI\YouControler.WebAPI\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
