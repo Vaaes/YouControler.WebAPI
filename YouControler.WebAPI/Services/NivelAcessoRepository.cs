@@ -18,8 +18,7 @@ namespace YouControler.WebAPI.Services
                 await conn.ExecuteAsync("SP_INS_NIVELACESSO",
                     new
                     {
-                        Nome = entity.Tela,
-                        CPF = entity.Acesso,
+                        Role = entity.Role,
                     });
             });
         }
@@ -58,8 +57,7 @@ namespace YouControler.WebAPI.Services
                     new
                     {
                         Id = entity.Id,
-                        Nome = entity.Tela,
-                        CPF = entity.Acesso,
+                        Role = entity.Role,
                     });
             });
         }
