@@ -27,7 +27,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<NivelAcesso>("SP_GET_NIVELACESSO");
+                var query = await conn.QueryAsync<NivelAcesso>("SP_SEL_NIVELACESSO");
                 return query;
             });
         }

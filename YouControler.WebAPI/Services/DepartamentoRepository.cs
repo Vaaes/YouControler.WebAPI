@@ -15,8 +15,14 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("",
-                    new { Name = entity.NomeDepartamento, Cost = entity.Sala });
+                await conn.ExecuteAsync("SP_INS_DEPARTAMENTO",
+                    new
+                    {
+                        NomeDepartamento = entity.NomeDepartamento,
+                        GestorDepartamento = entity.Sala,
+                        Andar = entity.Andar,
+                        Sala = entity.Sala
+                    });
             });
         }
 
@@ -24,7 +30,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Departamento>("");
+                var query = await conn.QueryAsync<Departamento>("SP_SEL_DEPARTAMENTO");
                 return query;
             });
         }
@@ -42,7 +48,7 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("", new { Id = id });
+                await conn.ExecuteAsync("SP_DEL_DEPARTAMENTO", new { Id = id });
             });
         }
 
@@ -51,7 +57,14 @@ namespace YouControler.WebAPI.Services
             await WithConnection(async conn =>
             {
                 await conn.ExecuteAsync("",
-                    new { Name = entity.Sala, Cost = entity.GestorDepartamento, entity.Id });
+                    new
+                    {
+                        NomeDepartamento = entity.NomeDepartamento,
+                        GestorDepartamento = entity.Sala,
+                        Andar = entity.Andar,
+                        Sala = entity.Sala,
+                        Id = entity.Id
+                    });
             });
         }
     }

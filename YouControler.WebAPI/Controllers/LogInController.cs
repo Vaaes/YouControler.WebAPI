@@ -25,17 +25,19 @@ namespace YouControler.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<dynamic>> Authenticate([FromBody]Usuario model)
         {
-            var user = _logInRepository.VerificaAcesso(model.Login, model.Senha);
+            var user = await _logInRepository.VerificaAcesso(model.Login, model.Senha);
 
             if (user == null)
                 return NotFound(new { message = "Usuário ou senha inválidos" });
 
-            var token = TokenService.GenerateToken(user.Result);
+            var token = TokenService.GenerateToken(user);
             model.Senha = "";
 
             return new
             {
-                user = user,
+                Id = user.Id,
+                Nome = user.Nome,
+                Role = user.Role,
                 token = token
             };
         }

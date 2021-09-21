@@ -6,10 +6,10 @@ namespace YouControler.WebAPI.Services.Interfaces
 {
     public interface IColaboradorRepository
     {
-        ValueTask<Colaborador> GetColaboradorById(int id);
+        ValueTask<Colaborador> GetColaboradorById(string CPF);
         Task AddColaborador(Colaborador entity);
         Task UpdateColaborador(Colaborador entity);
-        Task RemoveColaborador(int id);
+        Task RemoveColaborador(string CPF);
         Task<IEnumerable<Colaborador>> GetAllColaboradores();
     }
 }

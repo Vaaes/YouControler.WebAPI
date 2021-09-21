@@ -15,8 +15,12 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("",
-                    new { Name = entity.Nome, Cost = entity.Nascimento });
+                await conn.ExecuteAsync("SP_INS_COLABORADOR",
+                    new
+                    {
+                        Name = entity.Nome,
+                        Cost = entity.Nascimento
+                    });
             });
         }
 
@@ -29,20 +33,20 @@ namespace YouControler.WebAPI.Services
             });
         }
 
-        public async ValueTask<Colaborador> GetColaboradorById(int id)
+        public async ValueTask<Colaborador> GetColaboradorById(string CPF)
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Colaborador>("", new { Id = id });
+                var query = await conn.QueryFirstOrDefaultAsync<Colaborador>("SP_SEL_COLABORADOR_CPF", new { CPF = CPF });
                 return query;
             });
         }
 
-        public async Task RemoveColaborador(int id)
+        public async Task RemoveColaborador(string CPF)
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("", new { Id = id });
+                await conn.ExecuteAsync("SP_DEL_COLABORADOR_CPF", new { CPF = CPF });
             });
         }
 
@@ -50,8 +54,13 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("",
-                    new { Name = entity.Nome, Cost = entity.Nascimento, entity.Id });
+                await conn.ExecuteAsync("SP_UPD_COLABORADOR",
+                    new
+                    {
+                        Name = entity.Nome,
+                        Cost = entity.Nascimento,
+                        entity.Id
+                    });
             });
         }
     }

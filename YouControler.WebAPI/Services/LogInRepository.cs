@@ -17,7 +17,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Usuario>("SP_GET_USUARIO_VERIFICA_ACESSO @Login, @Senha", new { Login = username, Senha = password });
+                var query = await conn.QueryFirstOrDefaultAsync<Usuario>("SP_SEL_USUARIO_VERIFICA_ACESSO @Login, @Senha", new { Login = username, Senha = password });
                 return query;
             });
         }

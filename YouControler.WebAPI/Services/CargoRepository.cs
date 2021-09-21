@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿
+using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,8 +16,12 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("",
-                    new { Name = entity.Nome_Cargo, Cost = entity.Nome_Cargo });
+                await conn.ExecuteAsync("SP_INS_CARGO",
+                    new
+                    {
+                        Nome_Cargo = entity.Nome_Cargo,
+                        Descricao_Cargo = entity.Nome_Cargo
+                    });
             });
         }
 
@@ -24,7 +29,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Cargo>("GET_CARGO");
+                var query = await conn.QueryAsync<Cargo>("SP_SEL_CARGO");
                 return query;
             });
         }
@@ -42,7 +47,7 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("", new { Id = id });
+                await conn.ExecuteAsync("SP_DEL_CARGO", new { Id = id });
             });
         }
 
@@ -50,8 +55,13 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("",
-                    new { Name = entity.Nome_Cargo, Cost = entity.Descricao_Cargo, entity.Id });
+                await conn.ExecuteAsync("SP_UPD_CARGO",
+                    new
+                    {
+                        Id = entity.Id
+                        Nome_Cargo = entity.Nome_Cargo,
+                        Descricao_Cargo = entity.Nome_Cargo
+                    });
             });
         }
     }

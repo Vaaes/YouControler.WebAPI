@@ -35,7 +35,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Usuario>("SP_GET_USUARIO");
+                var query = await conn.QueryAsync<Usuario>("SP_SEL_USUARIO");
                 return query;
             });
         }
