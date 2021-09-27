@@ -19,7 +19,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Departamento>>> GetAllDepartamentos()
         {
             var products = await _departamentoRepository.GetAllDepartamentos();
@@ -27,7 +27,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Departamento>>> GetDepartamentoById(int id)
         {
             var product = await _departamentoRepository.GetDepartamentoById(id);
@@ -35,7 +35,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult> AddDepartamento([FromBody] Departamento entity)
         {
             await _departamentoRepository.AddDepartamento(entity);
@@ -43,7 +43,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<Cargo>> UpdateDepartamento([FromBody] Departamento entity)
         {
             await _departamentoRepository.UpdateDepartamento(entity);
@@ -51,7 +51,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult> RemoveDepartamento(int id)
         {
             await _departamentoRepository.RemoveDepartamento(id);

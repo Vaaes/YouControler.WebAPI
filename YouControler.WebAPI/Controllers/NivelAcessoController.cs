@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using YouControler.WebAPI.Model;
 using YouControler.WebAPI.Services.Interfaces;
@@ -19,23 +21,31 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
-        public async Task<ActionResult<IEnumerable<NivelAcesso>>> GetAllNivelAcesso()
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<NivelAcesso>>> GetAllPerfilAcesso()
         {
             var products = await _nivelAcessoRepository.GetAllNivelAcesso();
             return Ok(products);
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<NivelAcesso>>> GetNivelAcessoById(int id)
         {
             var product = await _nivelAcessoRepository.GetNivelAcessoById(id);
             return Ok(product);
         }
 
+        [HttpGet("{role}")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<NivelAcesso>>> GetNivelAcessoByRole(string Role)
+        {
+            var product = await _nivelAcessoRepository.GetNivelAcessoByRole(Role);
+            return Ok(product);
+        }
+
         [HttpPost]
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public async Task<ActionResult> AddNivelAcesso([FromBody] NivelAcesso entity)
         {
             await _nivelAcessoRepository.AddNivelAcesso(entity);
@@ -43,15 +53,15 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Administrador")]
-        public async Task<ActionResult<Usuario>> UpdateNivelAcesso([FromBody] NivelAcesso entity)
+        [Authorize]
+        public async Task<ActionResult<NivelAcesso>> UpdateNivelAcesso([FromBody] NivelAcesso entity)
         {
             await _nivelAcessoRepository.UpdateNivelAcesso(entity);
             return Ok(entity);
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         public async Task<ActionResult> RemoveNivelAcesso(int id)
         {
             await _nivelAcessoRepository.RemoveNivelAcesso(id);

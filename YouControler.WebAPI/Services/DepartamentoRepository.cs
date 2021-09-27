@@ -15,11 +15,11 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_INS_DEPARTAMENTO",
+                await conn.ExecuteAsync("SP_INS_DEPARTAMENTO  @NomeDepartamento,@GestorDepartamento,@Andar,@Sala",
                     new
                     {
                         NomeDepartamento = entity.NomeDepartamento,
-                        GestorDepartamento = entity.Sala,
+                        GestorDepartamento = entity.GestorDepartamento,
                         Andar = entity.Andar,
                         Sala = entity.Sala
                     });
@@ -39,7 +39,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Departamento>("", new { Id = id });
+                var query = await conn.QueryFirstOrDefaultAsync<Departamento>("SP_SEL_DEPARTAMENTO_ID @ID", new { Id = id });
                 return query;
             });
         }
@@ -48,7 +48,7 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_DEL_DEPARTAMENTO", new { Id = id });
+                await conn.ExecuteAsync("SP_DEL_DEPARTAMENTO @ID", new { Id = id });
             });
         }
 
@@ -56,14 +56,14 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("",
+                await conn.ExecuteAsync("SP_UPD_DEPARTAMENTO @NomeDepartamento,@GestorDepartamento,@Andar,@Sala,@ID",
                     new
                     {
                         NomeDepartamento = entity.NomeDepartamento,
-                        GestorDepartamento = entity.Sala,
+                        GestorDepartamento = entity.GestorDepartamento,
                         Andar = entity.Andar,
                         Sala = entity.Sala,
-                        Id = entity.Id
+                        ID = entity.Id
                     });
             });
         }

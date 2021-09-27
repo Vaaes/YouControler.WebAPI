@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using YouControler.WebAPI.Model;
@@ -21,5 +22,16 @@ namespace YouControler.WebAPI.Services
                 return query;
             });
         }
+        public async Task<IEnumerable<ControleAcesso>> GetAllControleAcesso(int IdNivelAcesso)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Id", value: (object)IdNivelAcesso ?? DBNull.Value, dbType: DbType.Int32);
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<ControleAcesso>("SP_SEL_CONTROLE_ACESSO_MENU @Id", args);
+                return query;
+            });
+        }
+
     }
 }

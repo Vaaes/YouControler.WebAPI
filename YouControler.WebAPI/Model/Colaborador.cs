@@ -7,7 +7,7 @@ namespace YouControler.WebAPI.Model
         public int Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
-        public DateTime Nascimento { get; set; }
+        public DateTime Dt_Nascimento { get; set; }
         public string Telefone_Celular { get; set; }
         public string Telefone_Residencial { get; set; }
         public string Email { get; set; }

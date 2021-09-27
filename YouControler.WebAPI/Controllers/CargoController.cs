@@ -19,7 +19,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Cargo>>> GetAllCargos()
         {
             var products = await _cargoRepository.GetAllCargos();
@@ -27,7 +27,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Cargo>>> GetCargoById(int id)
         {
             var product = await _cargoRepository.GetCargoById(id);
@@ -35,7 +35,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult> AddCargo([FromBody] Cargo entity)
         {
             await _cargoRepository.AddCargo(entity);
@@ -43,7 +43,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<Cargo>> UpdateCargo([FromBody] Cargo entity)
         {
             await _cargoRepository.UpdateCargo(entity);
@@ -51,7 +51,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult> RemoveCargo(int id)
         {
             await _cargoRepository.RemoveCargo(id);

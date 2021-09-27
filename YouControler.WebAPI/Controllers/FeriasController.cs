@@ -19,7 +19,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Ferias>>> GetAllFerias()
         {
             var products = await _feriasRepository.GetAllFerias();
@@ -27,7 +27,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrador,Gerente,Usuario")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Ferias>>> GetFeriasById(int id)
         {
             var product = await _feriasRepository.GetFeriasById(id);
@@ -35,7 +35,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrador,Gerente,Usuario")]
+        [Authorize]
         public async Task<ActionResult> AddFerias([FromBody] Ferias entity)
         {
             await _feriasRepository.AddFerias(entity);
@@ -43,7 +43,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Administrador,Gerente,Usuario")]
+        [Authorize]
         public async Task<ActionResult<Ferias>> UpdateFerias([FromBody] Ferias entity)
         {
             await _feriasRepository.UpdateFerias(entity);
@@ -51,7 +51,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrador,Gerente,Usuario")]
+        [Authorize]
         public async Task<ActionResult> RemoveFerias(int id)
         {
             await _feriasRepository.RemoveFerias(id);

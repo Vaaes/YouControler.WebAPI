@@ -32,8 +32,10 @@ namespace YouControler.WebAPI
             services.AddTransient<IColaboradorRepository, ColaboradorRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IFeriasRepository, FeriasRepository>();
-            services.AddTransient<INivelAcessoRepository, NivelAcessoRepository>();
+            services.AddTransient<IPerfilRepository, PerfilRepository>();
             services.AddTransient<ILogInRepository, LogInRepository>();
+            services.AddTransient<IMenuRepository, MenuRepository>();
+            services.AddTransient<IPermissoesRepository, PermissoesRepository>();
 
             services.AddCors();
 

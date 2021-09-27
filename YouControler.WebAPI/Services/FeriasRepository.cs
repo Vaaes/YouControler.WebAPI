@@ -30,7 +30,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Ferias>("SP_SEL_FERIAS");
+                var query = await conn.QueryAsync<Ferias>("SP_GET_FERIAS");
                 return query;
             });
         }
@@ -39,7 +39,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Ferias>("", new { Id = id });
+                var query = await conn.QueryFirstOrDefaultAsync<Ferias>("SP_SEL_FERIAS_ID @ID", new { Id = id });
                 return query;
             });
         }
@@ -56,7 +56,7 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_UPD_FERIAS",
+                await conn.ExecuteAsync("SP_UPD_NIVELACESSO",
                     new
                     {
                         Id = entity.Id,

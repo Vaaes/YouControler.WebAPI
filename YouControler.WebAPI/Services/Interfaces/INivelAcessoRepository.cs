@@ -6,7 +6,8 @@ namespace YouControler.WebAPI.Services.Interfaces
 {
     public interface INivelAcessoRepository
     {
-        ValueTask<NivelAcesso> GetNivelAcessoById(int id);
+        Task<IEnumerable<NivelAcesso>> GetNivelAcessoById(int id);
+        Task<IEnumerable<NivelAcesso>> GetNivelAcessoByRole(string Role);
         Task AddNivelAcesso(NivelAcesso entity);
         Task UpdateNivelAcesso(NivelAcesso entity);
         Task RemoveNivelAcesso(int id);

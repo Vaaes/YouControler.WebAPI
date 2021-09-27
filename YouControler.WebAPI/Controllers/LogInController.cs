@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using YouControler.WebAPI.Model;
 using YouControler.WebAPI.Services.Interfaces;
@@ -19,11 +20,10 @@ namespace YouControler.WebAPI.Controllers
             _logInRepository = logInRepository;
         }
 
-
         [HttpPost]
         [Route("Auth")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody]Usuario model)
+        public async Task<ActionResult<dynamic>> Authenticate([FromBody] Usuario model)
         {
             var user = await _logInRepository.VerificaAcesso(model.Login, model.Senha);
 
@@ -37,9 +37,17 @@ namespace YouControler.WebAPI.Controllers
             {
                 Id = user.Id,
                 Nome = user.Nome,
-                Role = user.Role,
+                IdNivelAcesso = user.IdNivelAcesso,
                 token = token
             };
+        }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<ControleAcesso>>> GetControleAcesso(int id)
+        {
+            var product = await _logInRepository.GetAllControleAcesso(id);
+            return Ok(product);
         }
     }
 }

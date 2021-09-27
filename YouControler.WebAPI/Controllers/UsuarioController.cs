@@ -19,7 +19,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetAllUsuario()
         {
             var products = await _usuarioRepository.GetAllUsuario();
@@ -27,7 +27,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarioById(int id)
         {
             var product = await _usuarioRepository.GetUsuarioById(id);
@@ -35,7 +35,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult> AddUsuario([FromBody] Usuario entity)
         {
             await _usuarioRepository.AddUsuario(entity);
@@ -43,7 +43,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<Usuario>> UpdateUsuario([FromBody] Usuario entity)
         {
             await _usuarioRepository.UpdateUsuario(entity);
@@ -51,7 +51,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult> RemoveUsuario(int id)
         {
             await _usuarioRepository.RemoveUsuario(id);

@@ -18,7 +18,7 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<Colaborador>> GetAllColaboradores()
         {
             var products = await _colaboradorRepository.GetAllColaboradores();
@@ -26,16 +26,16 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
-        public async Task<ActionResult<Colaborador>> GetColaboradorById(int id)
+        [Route("{CPF}")]
+        [Authorize]
+        public async Task<ActionResult<Colaborador>> GetColaboradorById(string CPF)
         {
-            var product = await _colaboradorRepository.GetColaboradorById(id);
+            var product = await _colaboradorRepository.GetColaboradorById(CPF);
             return Ok(product);
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult> AddColaborador(Colaborador entity)
         {
             await _colaboradorRepository.AddColaborador(entity);
@@ -43,18 +43,18 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Administrador,Gerente")]
+        [Authorize]
         public async Task<ActionResult<Colaborador>> UpdateColaborador(Colaborador entity)
         {
             await _colaboradorRepository.UpdateColaborador(entity);
             return Ok(entity);
         }
 
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Administrador,Gerente")]
-        public async Task<ActionResult> RemoveColaborador(int id)
+        [HttpDelete("{CPF}")]
+        [Authorize]
+        public async Task<ActionResult> RemoveColaborador(string CPF)
         {
-            await _colaboradorRepository.RemoveColaborador(id);
+            await _colaboradorRepository.RemoveColaborador(CPF);
             return Ok();
         }
     }

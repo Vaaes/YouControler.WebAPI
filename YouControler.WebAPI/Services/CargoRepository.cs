@@ -1,5 +1,4 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,11 +15,11 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_INS_CARGO",
+                await conn.ExecuteAsync("SP_INS_CARGO @Nome, @Descricao",
                     new
                     {
-                        Nome_Cargo = entity.Nome_Cargo,
-                        Descricao_Cargo = entity.Nome_Cargo
+                        Nome = entity.Nome_Cargo,
+                        Descricao = entity.Descricao_Cargo
                     });
             });
         }
@@ -38,7 +37,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Cargo>("", new { Id = id });
+                var query = await conn.QueryFirstOrDefaultAsync<Cargo>("SP_SEL_CARGO_ID @ID", new { Id = id });
                 return query;
             });
         }
@@ -47,7 +46,7 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_DEL_CARGO", new { Id = id });
+                await conn.ExecuteAsync("SP_DEL_CARGO @ID", new { Id = id });
             });
         }
 
@@ -55,13 +54,13 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_UPD_CARGO",
+                await conn.ExecuteAsync("SP_UPD_CARGO @ID, @Nome, @Descricao",
                     new
                     {
-                        Id = entity.Id
-                        Nome_Cargo = entity.Nome_Cargo,
-                        Descricao_Cargo = entity.Nome_Cargo
-                    });
+                        ID = entity.Id,
+                        Nome = entity.Nome_Cargo,
+                        Descricao = entity.Descricao_Cargo
+                    }); ;
             });
         }
     }

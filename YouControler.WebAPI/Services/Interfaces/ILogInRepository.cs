@@ -9,5 +9,6 @@ namespace YouControler.WebAPI.Services.Interfaces
     public interface ILogInRepository
     {
         ValueTask<Usuario> VerificaAcesso(string username, string password);
+        Task<IEnumerable<ControleAcesso>> GetAllControleAcesso(int IdNivelAcesso);
     }
 }

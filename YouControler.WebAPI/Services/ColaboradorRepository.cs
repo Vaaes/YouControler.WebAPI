@@ -15,12 +15,30 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_INS_COLABORADOR",
+                await conn.ExecuteAsync("SP_INS_COLABORADOR @Nome,@CPF,@Dt_Nascimento,@Telefone_Celular, @Telefone_Residencial,@Email, @CEP, @Endereco_Rua, @Endereco_Numero,@Endereco_Bairro," +
+                    " @Endereco_Cidade,@Endereco_Estado,@Estado_Civil,@Filhos,@Qnt_Filhos,@Escolaridade,@Departamento,@Ativo,@Salario",
                     new
                     {
-                        Name = entity.Nome,
-                        Cost = entity.Nascimento
-                    });
+                        entity.Nome,
+                        entity.CPF,
+                        entity.Dt_Nascimento,
+                        entity.Telefone_Celular,
+                        entity.Telefone_Residencial,
+                        entity.Email,
+                        entity.CEP,
+                        entity.Endereco_Rua,
+                        entity.Endereco_Numero,
+                        entity.Endereco_Bairro,
+                        entity.Endereco_Cidade,
+                        entity.Endereco_Estado,
+                        entity.Estado_Civil,
+                        entity.Filhos,
+                        entity.Qnt_Filhos,
+                        entity.Escolaridade,
+                        entity.Departamento,
+                        entity.Ativo,
+                        entity.Salario
+                    }); ;
             });
         }
 
@@ -28,7 +46,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Colaborador>("");
+                var query = await conn.QueryAsync<Colaborador>("SP_SEL_COLABORADOR");
                 return query;
             });
         }
@@ -37,7 +55,8 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Colaborador>("SP_SEL_COLABORADOR_CPF", new { CPF = CPF });
+                var query = await conn.QueryFirstOrDefaultAsync<Colaborador>("SP_SEL_COLABORADOR_CPF @CPF",
+                    new { CPF = CPF });
                 return query;
             });
         }
@@ -46,7 +65,7 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_DEL_COLABORADOR_CPF", new { CPF = CPF });
+                await conn.ExecuteAsync("SP_DEL_COLABORADOR_CPF @CPF", new { CPF = CPF });
             });
         }
 
@@ -54,12 +73,29 @@ namespace YouControler.WebAPI.Services
         {
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_UPD_COLABORADOR",
+                await conn.ExecuteAsync("SP_UPD_COLABORADOR @Nome,@CPF,@Dt_Nascimento,@Telefone_Celular, @Telefone_Residencial,@Email, @CEP, @Endereco_Rua, @Endereco_Numero,@Endereco_Bairro," +
+                    " @Endereco_Cidade,@Endereco_Estado,@Estado_Civil,@Filhos,@Qnt_Filhos,@Escolaridade,@Departamento,@Ativo,@Salario",
                     new
                     {
-                        Name = entity.Nome,
-                        Cost = entity.Nascimento,
-                        entity.Id
+                        entity.Nome,
+                        entity.CPF,
+                        entity.Dt_Nascimento,
+                        entity.Telefone_Celular,
+                        entity.Telefone_Residencial,
+                        entity.Email,
+                        entity.CEP,
+                        entity.Endereco_Rua,
+                        entity.Endereco_Numero,
+                        entity.Endereco_Bairro,
+                        entity.Endereco_Cidade,
+                        entity.Endereco_Estado,
+                        entity.Estado_Civil,
+                        entity.Filhos,
+                        entity.Qnt_Filhos,
+                        entity.Escolaridade,
+                        entity.Departamento,
+                        entity.Ativo,
+                        entity.Salario
                     });
             });
         }
