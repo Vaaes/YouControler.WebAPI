@@ -19,27 +19,12 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("Get")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Perfil>>> GetAllPerfilAcesso()
+        public async Task<ActionResult<IEnumerable<Perfil>>> GetAllPerfilAcesso(int? id, string role = null)
         {
-            var products = await _nivelAcessoRepository.GetAllPerfilAcesso();
+            var products = await _nivelAcessoRepository.GetPerfilAcesso(id, role);
             return Ok(products);
-        }
-
-        [HttpGet("{id}")]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<Perfil>>> GetPerfilAcessoById(int id)
-        {
-            var product = await _nivelAcessoRepository.GetPerfilAcessoById(id);
-            return Ok(product);
-        }
-
-        [HttpGet("{role}")]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<Perfil>>> GetPerfilAcessoByRole(string Role)
-        {
-            var product = await _nivelAcessoRepository.GetPerfilAcessoByRole(Role);
-            return Ok(product);
         }
 
         [HttpPost]

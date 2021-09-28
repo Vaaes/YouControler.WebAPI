@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using YouControler.WebAPI.Model;
 using YouControler.WebAPI.Services.Interfaces;
@@ -13,21 +15,20 @@ namespace YouControler.WebAPI.Services
 
         public async Task AddUsuario(Usuario entity)
         {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Nome", value: (object)entity.Nome ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@CPF", value: (object)entity.CPF ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Nascimento", value: (object)entity.Nascimento ?? DBNull.Value, dbType: DbType.DateTime);
+            args.Add(name: "@Telefone_Celular", value: (object)entity.Telefone_Celular ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Telefone_Residencial", value: (object)entity.Telefone_Residencial ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Email", value: (object)entity.Email ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@CEP", value: (object)entity.CEP ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Login", value: (object)entity.Login ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Senha", value: (object)entity.Senha ?? DBNull.Value, dbType: DbType.String);
+
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_INS_USUARIO",
-                    new
-                    {
-                        Nome = entity.Nome,
-                        CPF = entity.CPF,
-                        Nascimento = entity.Nascimento,
-                        Telefone_Celular = entity.Telefone_Celular,
-                        Telefone_Residencial = entity.Telefone_Residencial,
-                        Email = entity.Email,
-                        CEP = entity.CEP,
-                        Login = entity.Login,
-                        Senha = entity.Senha
-                    });
+                await conn.ExecuteAsync("SP_INS_USUARIO @Nome, @CPF, @Nascimento, @Telefone_Celular, @Telefone_Residencial, @Email, @CEP, @Login, @Senha", args);
             });
         }
 
@@ -42,39 +43,42 @@ namespace YouControler.WebAPI.Services
 
         public async ValueTask<Usuario> GetUsuarioById(int id)
         {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Usuario>("SP_SEL_USUARIO_ID @ID", new { Id = id });
+                var query = await conn.QueryFirstOrDefaultAsync<Usuario>("SP_SEL_USUARIO_ID @ID", args);
                 return query;
             });
         }
 
         public async Task RemoveUsuario(int id)
         {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_DEL_USUARIO", new { Id = id });
+                await conn.ExecuteAsync("SP_DEL_USUARIO @ID", args);
             });
         }
 
         public async Task UpdateUsuario(Usuario entity)
         {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Id", value: (object)entity.Id ?? DBNull.Value, dbType: DbType.Int32);
+            args.Add(name: "@Nome", value: (object)entity.Nome ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@CPF", value: (object)entity.CPF ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Nascimento", value: (object)entity.Nascimento ?? DBNull.Value, dbType: DbType.DateTime);
+            args.Add(name: "@Telefone_Celular", value: (object)entity.Telefone_Celular ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Telefone_Residencial", value: (object)entity.Telefone_Residencial ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Email", value: (object)entity.Email ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@CEP", value: (object)entity.CEP ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Login", value: (object)entity.Login ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Senha", value: (object)entity.Senha ?? DBNull.Value, dbType: DbType.String);
+
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_UPD_USUARIO",
-                    new
-                    {
-                        Id = entity.Id,
-                        Nome = entity.Nome,
-                        CPF = entity.CPF,
-                        Nascimento = entity.Nascimento,
-                        Telefone_Celular = entity.Telefone_Celular,
-                        Telefone_Residencial = entity.Telefone_Residencial,
-                        Email = entity.Email,
-                        CEP = entity.CEP,
-                        Login = entity.Login,
-                        Senha = entity.Senha
-                    });
+                await conn.ExecuteAsync("SP_UPD_USUARIO @Id, @Nome, @CPF, @Nascimento, @Telefone_Celular, @Telefone_Residencial, @Email, @CEP, @Login, @Senha", args);
             });
         }
     }

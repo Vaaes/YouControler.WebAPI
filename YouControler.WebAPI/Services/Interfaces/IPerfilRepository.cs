@@ -6,11 +6,9 @@ namespace YouControler.WebAPI.Services.Interfaces
 {
     public interface IPerfilRepository
     {
-        Task<IEnumerable<Perfil>> GetPerfilAcessoById(int id);
-        Task<IEnumerable<Perfil>> GetPerfilAcessoByRole(string Role);
         Task AddPerfilAcesso(Perfil entity);
         Task UpdatePerfilAcesso(Perfil entity);
         Task RemovePerfilAcesso(int id);
-        Task<IEnumerable<Perfil>> GetAllPerfilAcesso();
+        Task<IEnumerable<Perfil>> GetPerfilAcesso(int? id, string Role);
     }
 }

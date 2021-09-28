@@ -36,7 +36,7 @@ namespace YouControler.WebAPI
             services.AddTransient<ILogInRepository, LogInRepository>();
             services.AddTransient<IMenuRepository, MenuRepository>();
             services.AddTransient<IPermissoesRepository, PermissoesRepository>();
-
+            services.AddTransient<INivelAcessoRepository, NivelAcessoRepository>();
             services.AddCors();
 
             var key = Encoding.ASCII.GetBytes(Settings.Secret);

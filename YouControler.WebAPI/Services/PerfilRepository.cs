@@ -24,38 +24,18 @@ namespace YouControler.WebAPI.Services
             });
         }
 
-        public async Task<IEnumerable<Perfil>> GetAllPerfilAcesso()
-        {
-            return await WithConnection(async conn =>
-            {
-                var query = await conn.QueryAsync<Perfil>("SP_SEL_PERFILACESSO");
-                return query;
-            });
-        }
-
-        public async Task<IEnumerable<Perfil>> GetPerfilAcessoById(int id)
+        public async Task<IEnumerable<Perfil>> GetPerfilAcesso(int? id, string Role)
         {
             var args = new DynamicParameters(new { });
             args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
+            args.Add(name: "@Role", value: (object)Role ?? DBNull.Value, dbType: DbType.String);
 
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Perfil>("SP_SEL_PERFILACESSO @Id", args);
+                var query = await conn.QueryAsync<Perfil>("SP_SEL_PERFILACESSO @Id, @Role", args);
                 return query;
             });
         }
-        public async Task<IEnumerable<Perfil>> GetPerfilAcessoByRole(string Role)
-        {
-            var args = new DynamicParameters(new { });
-            args.Add(name: "@Role", value: (object)Role ?? DBNull.Value, dbType: DbType.Int32);
-
-            return await WithConnection(async conn =>
-            {
-                var query = await conn.QueryAsync<Perfil>("SP_SEL_PERFILACESSO @Role", args);
-                return query;
-            });
-        }
-
 
         public async Task RemovePerfilAcesso(int id)
         {

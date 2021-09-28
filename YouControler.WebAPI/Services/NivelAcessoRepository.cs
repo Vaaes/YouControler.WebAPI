@@ -31,7 +31,7 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<NivelAcesso>("SP_SEL_PERFILACESSO");
+                var query = await conn.QueryAsync<NivelAcesso>("SP_SEL_NIVELACESSO");
                 return query;
             });
         }
@@ -42,7 +42,7 @@ namespace YouControler.WebAPI.Services
             args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<NivelAcesso>("SP_SEL_PERFILACESSO @Id", args);
+                var query = await conn.QueryAsync<NivelAcesso>("SP_SEL_NIVELACESSO @Id", args);
                 return query;
             });
         }
@@ -54,7 +54,7 @@ namespace YouControler.WebAPI.Services
 
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<NivelAcesso>("SP_SEL_PERFILACESSO @Id", args);
+                var query = await conn.QueryAsync<NivelAcesso>("SP_SEL_NIVELACESSO @IdNivelAcesso", args);
                 return query;
             });
         }
@@ -65,7 +65,7 @@ namespace YouControler.WebAPI.Services
             args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_DEL_PERFILACESSO @Id", args);
+                await conn.ExecuteAsync("SP_DEL_NIVELACESSO @Id", args);
             });
         }
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cliente\\source\\repos\\TCC\\API\\YouControler.WebAPI\\YouControler.WebAPI\\YouControler.WebAPI.csproj": {}
+    "C:\\Users\\Cliente\\source\\repos\\_YouController\\API\\YouControler.WebAPI-main\\YouControler.WebAPI\\YouControler.WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cliente\\source\\repos\\TCC\\API\\YouControler.WebAPI\\YouControler.WebAPI\\YouControler.WebAPI.csproj": {
+    "C:\\Users\\Cliente\\source\\repos\\_YouController\\API\\YouControler.WebAPI-main\\YouControler.WebAPI\\YouControler.WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cliente\\source\\repos\\TCC\\API\\YouControler.WebAPI\\YouControler.WebAPI\\YouControler.WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Cliente\\source\\repos\\_YouController\\API\\YouControler.WebAPI-main\\YouControler.WebAPI\\YouControler.WebAPI.csproj",
         "projectName": "YouControler.WebAPI",
-        "projectPath": "C:\\Users\\Cliente\\source\\repos\\TCC\\API\\YouControler.WebAPI\\YouControler.WebAPI\\YouControler.WebAPI.csproj",
+        "projectPath": "C:\\Users\\Cliente\\source\\repos\\_YouController\\API\\YouControler.WebAPI-main\\YouControler.WebAPI\\YouControler.WebAPI.csproj",
         "packagesPath": "C:\\Users\\Cliente\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cliente\\source\\repos\\TCC\\API\\YouControler.WebAPI\\YouControler.WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\Cliente\\source\\repos\\_YouController\\API\\YouControler.WebAPI-main\\YouControler.WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

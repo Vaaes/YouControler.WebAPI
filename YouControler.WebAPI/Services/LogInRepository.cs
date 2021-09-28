@@ -16,9 +16,12 @@ namespace YouControler.WebAPI.Services
 
         public async ValueTask<Usuario> VerificaAcesso(string username, string password)
         {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Login", value: (object)username ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@Senha", value: (object)password ?? DBNull.Value, dbType: DbType.Int32);
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Usuario>("SP_SEL_USUARIO_VERIFICA_ACESSO @Login, @Senha", new { Login = username, Senha = password });
+                var query = await conn.QueryFirstOrDefaultAsync<Usuario>("SP_SEL_USUARIO_VERIFICA_ACESSO @Login, @Senha", args);
                 return query;
             });
         }

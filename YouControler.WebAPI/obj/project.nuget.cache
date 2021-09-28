@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UlGyczMEvxq4mLzmTXmgGdbgmE9DiFiA1fA3Gl1Ikr9F6hgZFi/rYg0lyweMIlSxu8IBl03a8qaqZT5cUoi9Ww==",
+  "dgSpecHash": "3kSIA/tu69rp65ve3rcJvh+35jtNsSHFhfPkRzrrLDU1xDK6auphUDdFx68UBUgVD+dFsZ5otrNfkATcLNt65Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cliente\\source\\repos\\TCC\\API\\YouControler.WebAPI\\YouControler.WebAPI\\YouControler.WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\Cliente\\source\\repos\\_YouController\\API\\YouControler.WebAPI-main\\YouControler.WebAPI\\YouControler.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cliente\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\Cliente\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
