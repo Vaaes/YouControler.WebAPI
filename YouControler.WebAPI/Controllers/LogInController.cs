@@ -27,6 +27,9 @@ namespace YouControler.WebAPI.Controllers
         {
             var user = await _logInRepository.VerificaAcesso(model.Login, model.Senha);
 
+            Perfil model2 = new Perfil();
+            model2.Role = "Administrador";
+
             if (user == null)
                 return NotFound(new { message = "Usuário ou senha inválidos" });
 
@@ -46,6 +49,8 @@ namespace YouControler.WebAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ControleAcesso>>> GetControleAcesso(int id)
         {
+            Perfil model = new Perfil();
+            model.Role = "Usuario";
             var product = await _logInRepository.GetAllControleAcesso(id);
             return Ok(product);
         }

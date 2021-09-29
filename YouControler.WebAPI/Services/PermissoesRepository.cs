@@ -29,6 +29,18 @@ namespace YouControler.WebAPI.Services
             });
         }
 
+        public async Task<IEnumerable<Permissoes>> GetPermissionByProfile(int IdPerfilAcesso)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@IdPerfilAcesso", value: (object)IdPerfilAcesso ?? DBNull.Value, dbType: DbType.Int32);
+            args.Add(name: "@IdMenu", value: DBNull.Value, dbType: DbType.Int32);
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Permissoes>("SP_SEL_VERIFICA_PERMISSOES @IdPerfilAcesso, @IdMenu", args);
+                return query;
+            });
+        }
+
         public async Task<IEnumerable<Permissoes>> HasPermission(int IdPerfilAcesso, int IdMenu)
         {
             var args = new DynamicParameters(new { });

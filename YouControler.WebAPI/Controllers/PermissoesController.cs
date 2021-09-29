@@ -24,6 +24,14 @@ namespace YouControler.WebAPI.Controllers
             var product = await _permissoesRepository.HasPermission(id, IdMenu);
             return Ok(product);
         }
+        [HttpGet()]
+        [Route("GetByProfile/{IdPerfilAcesso}")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Permissoes>>> GetPermissionByProfile(int IdPerfilAcesso)
+        {
+            var product = await _permissoesRepository.GetPermissionByProfile(IdPerfilAcesso);
+            return Ok(product);
+        }
 
         [HttpPost]
         [Authorize]

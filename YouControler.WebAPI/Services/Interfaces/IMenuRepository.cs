@@ -8,5 +8,6 @@ namespace YouControler.WebAPI.Services.Interfaces
     {
         ValueTask<Menus> GetMenuById(int id);
         Task<IEnumerable<Menus>> GetAllMenu();
+        Task<IEnumerable<Menus>> GetMenuNivelAcessoByProfile(int IdPerfilAcesso);
     }
 }

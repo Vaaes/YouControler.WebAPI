@@ -32,5 +32,16 @@ namespace YouControler.WebAPI.Services
                 return query;
             });
         }
+
+        public async Task<IEnumerable<Menus>> GetMenuNivelAcessoByProfile(int IdPerfilAcesso)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@IdPerfilAcesso", value: (object)IdPerfilAcesso ?? DBNull.Value, dbType: DbType.Int32);
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Menus>("SP_SEL_MENUS_NIVELACESSO_BY_PROFILE @IdPerfilAcesso", args);
+                return query;
+            });
+        }
     }
 }

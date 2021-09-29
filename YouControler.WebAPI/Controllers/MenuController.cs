@@ -35,5 +35,14 @@ namespace YouControler.WebAPI.Controllers
             var product = await _menuRepository.GetMenuById(id);
             return Ok(product);
         }
+
+        [HttpGet]
+        [Route("GetByProfile/{IdPerfilAcesso}")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Menus>>> GetMenuNivelAcessoByProfile(int IdPerfilAcesso)
+        {
+            var product = await _menuRepository.GetMenuNivelAcessoByProfile(IdPerfilAcesso);
+            return Ok(product);
+        }
     }
 }
