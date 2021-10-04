@@ -16,18 +16,25 @@ namespace YouControler.WebAPI.Services
 
         public async Task AddUFuncionario(Funcionario entity)
         {
-            var args = new DynamicParameters(new { });
-            args.Add(name: "@Nome", value: (object)entity.Nome ?? DBNull.Value, dbType: DbType.Int32);
-            args.Add(name: "@CPF", value: (object)entity.CPF ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Tipo", value: (object)entity.Tipo ?? DBNull.Value, dbType: DbType.DateTime);
-            args.Add(name: "@Email", value: (object)entity.Email ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Salario", value: (object)entity.Salario ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@IdCargo", value: (object)entity.IdCargo ?? DBNull.Value, dbType: DbType.String);
-
-            await WithConnection(async conn =>
+            try
             {
-                await conn.ExecuteAsync("SPA_INS_FUNCIONARIO @IdNivelAcesso, @Nome, @CPF, @Tipo, @Email, @Salario, @IdCargo", args);
-            });
+                var args = new DynamicParameters(new { });
+                args.Add(name: "@Nome", value: (object)entity.Nome ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@CPF", value: (object)entity.CPF ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Tipo", value: (object)entity.Tipo ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Email", value: (object)entity.Email ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Salario", value: (object)entity.Salario ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@IdCargo", value: (object)entity.IdCargo ?? DBNull.Value, dbType: DbType.Int32);
+
+                await WithConnection(async conn =>
+                {
+                    await conn.ExecuteAsync("SPA_INS_FUNCIONARIO @Nome, @CPF, @Tipo, @Email, @Salario, @IdCargo", args);
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<IEnumerable<Funcionario>> GetAllFuncionario()
@@ -41,20 +48,28 @@ namespace YouControler.WebAPI.Services
 
         public async Task<IEnumerable<Funcionario>> GetFuncionariooByParam(int? id = null, string nome = null, string CPF = null, string Tipo = null, string email = null, string Salario = null, int? IdCargo = null)
         {
-            var args = new DynamicParameters(new { });
-            args.Add(name: "@ID", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
-            args.Add(name: "@Nome", value: (object)nome ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@IdNivelAcesso", value: (object)CPF ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@CPF", value: (object)Tipo ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Email", value: (object)email ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Usuario", value: (object)Salario ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Usuario", value: (object)IdCargo ?? DBNull.Value, dbType: DbType.Int32);
-
-            return await WithConnection(async conn =>
+            try
             {
-                var query = await conn.QueryAsync<Funcionario>("SPA_SEL_FUNCIONARIO @ID, @Nome, @IdNivelAcesso, @CPF, @Email, @Usuario", args);
-                return query;
-            });
+                var args = new DynamicParameters(new { });
+                args.Add(name: "@ID", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
+                args.Add(name: "@Nome", value: (object)nome ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@IdCargo", value: (object)IdCargo ?? DBNull.Value, dbType: DbType.Int32);
+                args.Add(name: "@CPF", value: (object)CPF ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Email", value: (object)email ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Salario", value: (object)Salario ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Tipo", value: (object)Tipo ?? DBNull.Value, dbType: DbType.String);
+
+                return await WithConnection(async conn =>
+                {
+                    var query = await conn.QueryAsync<Funcionario>("SPA_SEL_FUNCIONARIO @ID, @Nome, @CPF, @Tipo, @Email, @IdCargo", args);
+                    return query;
+                });
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public async Task RemoveFuncionario(int id)
@@ -69,19 +84,26 @@ namespace YouControler.WebAPI.Services
 
         public async Task UpdateFuncionario(Funcionario entity)
         {
-            var args = new DynamicParameters(new { });
-            args.Add(name: "@Id", value: (object)entity.Id ?? DBNull.Value, dbType: DbType.Int32);
-            args.Add(name: "@Nome", value: (object)entity.Nome ?? DBNull.Value, dbType: DbType.Int32);
-            args.Add(name: "@CPF", value: (object)entity.CPF ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Tipo", value: (object)entity.Tipo ?? DBNull.Value, dbType: DbType.DateTime);
-            args.Add(name: "@Email", value: (object)entity.Email ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Salario", value: (object)entity.Salario ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@IdCargo", value: (object)entity.IdCargo ?? DBNull.Value, dbType: DbType.String);
-
-            await WithConnection(async conn =>
+            try
             {
-                await conn.ExecuteAsync("SPA_UPD_FUNCIONARIO @Id, @IdNivelAcesso, @Nome, @CPF, @Tipo, @Email, @Salario, @IdCargo", args);
-            });
+                var args = new DynamicParameters(new { });
+                args.Add(name: "@Id", value: (object)entity.Id ?? DBNull.Value, dbType: DbType.Int32);
+                args.Add(name: "@Nome", value: (object)entity.Nome ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@CPF", value: (object)entity.CPF ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Tipo", value: (object)entity.Tipo ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Email", value: (object)entity.Email ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Salario", value: (object)entity.Salario ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@IdCargo", value: (object)entity.IdCargo ?? DBNull.Value, dbType: DbType.Int32);
+
+                await WithConnection(async conn =>
+                {
+                    await conn.ExecuteAsync("SPA_UPD_FUNCIONARIO @Id, @Nome, @CPF, @Tipo, @Email, @Salario, @IdCargo", args);
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            } 
         }
     }
 }
