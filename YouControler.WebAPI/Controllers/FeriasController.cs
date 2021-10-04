@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using YouControler.WebAPI.Model;
@@ -26,11 +27,12 @@ namespace YouControler.WebAPI.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetByParam")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Ferias>>> GetFeriasById(int id)
+        public async Task<ActionResult<IEnumerable<Ferias>>> GetFeriasByParam(int? Id = null, string Data_Inicio = null, string Data_Final = null, int? IdUsuario = null, bool? Aprovado = null)
         {
-            var product = await _feriasRepository.GetFeriasById(id);
+            var product = await _feriasRepository.GetFeriasByParam(Data_Inicio, Data_Final, Id, IdUsuario, Aprovado);
             return Ok(product);
         }
 

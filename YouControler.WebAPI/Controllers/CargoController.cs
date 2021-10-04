@@ -34,6 +34,16 @@ namespace YouControler.WebAPI.Controllers
             return Ok(product);
         }
 
+        //[HttpGet("{Nome}")]
+        [HttpGet]
+        [Route("GetCargoByName")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Cargo>>> GetCargoName(string Nome)
+        {
+            var product = await _cargoRepository.GetCargoName(Nome);
+            return Ok(product);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddCargo([FromBody] Cargo entity)

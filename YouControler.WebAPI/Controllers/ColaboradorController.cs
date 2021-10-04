@@ -26,11 +26,30 @@ namespace YouControler.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("CLT")]
+        [Authorize]
+        public async Task<ActionResult<CLT>> GetColaboradorByCLT()
+        {
+            var product = await _colaboradorRepository.GetColaboradorByCLT();
+            return Ok(product);
+        }
+
+
+        [HttpGet]
         [Route("{CPF}")]
         [Authorize]
         public async Task<ActionResult<Colaborador>> GetColaboradorById(string CPF)
         {
             var product = await _colaboradorRepository.GetColaboradorById(CPF);
+            return Ok(product);
+        }
+
+        [HttpGet]
+        [Route("Gestor")]
+        [Authorize]
+        public async Task<ActionResult<Colaborador>> GetColaboradorByGestor()
+        {
+            var product = await _colaboradorRepository.GetColaboradorByGestor();
             return Ok(product);
         }
 

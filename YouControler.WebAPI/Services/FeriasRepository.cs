@@ -18,8 +18,8 @@ namespace YouControler.WebAPI.Services
             var args = new DynamicParameters(new { });
             args.Add(name: "@Data_Inicio", value: (object)entity.Data_Inicio ?? DBNull.Value, dbType: DbType.String);
             args.Add(name: "@Data_Final", value: (object)entity.Data_Final ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@IdUsuario", value: (object)entity.IdUsuario ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Aprovado", value: (object)entity.Aprovado ?? DBNull.Value, dbType: DbType.String);
+            args.Add(name: "@IdUsuario", value: (object)entity.IdUsuario ?? DBNull.Value, dbType: DbType.Int32);
+            args.Add(name: "@Aprovado", value: (object)entity.Aprovado ?? DBNull.Value, dbType: DbType.Int32);
 
             await WithConnection(async conn =>
             {
@@ -31,20 +31,32 @@ namespace YouControler.WebAPI.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Ferias>("SP_GET_FERIAS");
+                var query = await conn.QueryAsync<Ferias>("SP_SEL_FERIAS");
                 return query;
             });
         }
 
-        public async ValueTask<Ferias> GetFeriasById(int id)
+        public async Task<IEnumerable<Ferias>> GetFeriasByParam(string Data_Inicio = null, string Data_Final = null, int? Id = null, int? IdUsuario = null, bool? Aprovado = null)
         {
-            var args = new DynamicParameters(new { });
-            args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
-            return await WithConnection(async conn =>
+            try
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Ferias>("SP_SEL_FERIAS_ID @ID", args);
-                return query;
-            });
+                var args = new DynamicParameters(new { });
+                args.Add(name: "@Id", value: (object)Id ?? DBNull.Value, dbType: DbType.Int32);
+                args.Add(name: "@Data_Inicio", value: (object)Data_Inicio ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Data_Final", value: (object)Data_Final ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@IdUsuario", value: (object)IdUsuario ?? DBNull.Value, dbType: DbType.Int32);
+                args.Add(name: "@Aprovado", value: (object)Aprovado ?? DBNull.Value, dbType: DbType.Int32);
+
+                return await WithConnection(async conn =>
+                { 
+                    var query = await conn.QueryAsync<Ferias>("SP_SEL_FERIAS @Id, @Data_Inicio, @Data_Final, @IdUsuario, @Aprovado", args);
+                    return query;
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            } 
         }
 
         public async Task RemoveFerias(int id)
@@ -53,23 +65,29 @@ namespace YouControler.WebAPI.Services
             args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
             await WithConnection(async conn =>
             {
-                await conn.ExecuteAsync("SP_DEL_FERIAS", args);
+                await conn.ExecuteAsync("SP_DEL_FERIAS @Id", args);
             });
         }
 
         public async Task UpdateFerias(Ferias entity)
         {
-            var args = new DynamicParameters(new { });
-            args.Add(name: "@Id", value: (object)entity.Id ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Data_Inicio", value: (object)entity.Data_Inicio ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Data_Final", value: (object)entity.Data_Final ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@IdUsuario", value: (object)entity.IdUsuario ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Aprovado", value: (object)entity.Aprovado ?? DBNull.Value, dbType: DbType.String);
-
-            await WithConnection(async conn =>
+            try
             {
-                await conn.ExecuteAsync("SP_UPD_NIVELACESSO @Id, @Data_Inicio, @Data_Final, @IdUsuario, @Aprovado", args);
-            });
+                var args = new DynamicParameters(new { });
+                args.Add(name: "@Id", value: (object)entity.Id ?? DBNull.Value, dbType: DbType.Int32);
+                args.Add(name: "@Data_Inicio", value: (object)entity.Data_Inicio ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@Data_Final", value: (object)entity.Data_Final ?? DBNull.Value, dbType: DbType.String);
+                args.Add(name: "@IdUsuario", value: (object)entity.IdUsuario ?? DBNull.Value, dbType: DbType.Int32);
+                args.Add(name: "@Aprovado", value: (object)0 ?? DBNull.Value, dbType: DbType.Int32);
+
+                await WithConnection(async conn =>
+                {
+                    await conn.ExecuteAsync("SP_UPD_FERIAS @Id, @Data_Inicio, @Data_Final, @IdUsuario, @Aprovado", args);
+                });
+            }
+            catch (Exception ex){
+                throw ex;
+            }
         }
     }
 }

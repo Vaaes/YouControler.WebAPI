@@ -6,10 +6,11 @@ namespace YouControler.WebAPI.Services.Interfaces
 {
     public interface ICargoRepository
     {
-        ValueTask<Cargo> GetCargoById(int id);
+        Task<IEnumerable<Cargo>> GetCargoById(int id);
         Task AddCargo(Cargo entity);
+        Task<IEnumerable<Cargo>> GetAllCargos();
+        Task<IEnumerable<Cargo>> GetCargoName(string Nome);
         Task UpdateCargo(Cargo entity);
         Task RemoveCargo(int id);
-        Task<IEnumerable<Cargo>> GetAllCargos();
     }
 }

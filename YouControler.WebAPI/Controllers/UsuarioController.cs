@@ -26,11 +26,12 @@ namespace YouControler.WebAPI.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetUsuarioByParam")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarioById(int id)
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarioById(int? id = null, string nome = null, int? IdNivelAcesso = null, string cpf = null, string email = null, string usuario = null)
         {
-            var product = await _usuarioRepository.GetUsuarioById(id);
+            var product = await _usuarioRepository.GetUsuarioById(id, nome, IdNivelAcesso, cpf, email, usuario);
             return Ok(product);
         }
 

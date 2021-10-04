@@ -35,13 +35,25 @@ namespace YouControler.WebAPI.Services
             });
         }
 
-        public async ValueTask<Departamento> GetDepartamentoById(int id)
+        public async Task<IEnumerable<Departamento>> GetCargoName(string nome)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Nome", value: (object)nome ?? DBNull.Value, dbType: DbType.String);
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Departamento>("SP_SEL_DEPARTAMENTO_NOME @Nome", args);
+                return query;
+            });
+        }
+
+        public async Task<IEnumerable<Departamento>> GetDepartamentoById(int id)
         {
             var args = new DynamicParameters(new { });
             args.Add(name: "@ID", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
+
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Departamento>("SP_SEL_DEPARTAMENTO_ID @ID", args);
+                var query = await conn.QueryAsync<Departamento>("SP_SEL_DEPARTAMENTO_ID @ID", args);
                 return query;
             });
         }

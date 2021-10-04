@@ -33,17 +33,29 @@ namespace YouControler.WebAPI.Services
                 return query;
             });
         }
-
-        public async ValueTask<Cargo> GetCargoById(int id)
+        public async Task<IEnumerable<Cargo>> GetCargoById(int id)
         {
             var args = new DynamicParameters(new { });
             args.Add(name: "@ID", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
+
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Cargo>("SP_SEL_CARGO_ID @ID", args);
+                var query = await conn.QueryAsync<Cargo>("SP_SEL_CARGO_ID @ID");
                 return query;
             });
         }
+        public async Task<IEnumerable<Cargo>> GetCargoName(string nome)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Nome", value: (object)nome ?? DBNull.Value, dbType: DbType.String);
+
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Cargo>("SP_SEL_CARGO_NOME @Nome", args);
+                return query;
+            });
+        }
+
 
         public async Task RemoveCargo(int id)
         {

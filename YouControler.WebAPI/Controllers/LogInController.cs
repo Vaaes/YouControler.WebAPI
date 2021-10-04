@@ -27,9 +27,6 @@ namespace YouControler.WebAPI.Controllers
         {
             var user = await _logInRepository.VerificaAcesso(model.Login, model.Senha);
 
-            Perfil model2 = new Perfil();
-            model2.Role = "Administrador";
-
             if (user == null)
                 return NotFound(new { message = "Usuário ou senha inválidos" });
 

@@ -11,5 +11,7 @@ namespace YouControler.WebAPI.Services.Interfaces
         Task UpdateColaborador(Colaborador entity);
         Task RemoveColaborador(string CPF);
         Task<IEnumerable<Colaborador>> GetAllColaboradores();
+        Task<IEnumerable<Colaborador>> GetColaboradorByGestor();
+        Task<IEnumerable<Colaborador>> GetColaboradorByCLT();
     }
 }

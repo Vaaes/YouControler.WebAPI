@@ -18,7 +18,7 @@ namespace YouControler.WebAPI.Services
         {
             var args = new DynamicParameters(new { });
             args.Add(name: "@Login", value: (object)username ?? DBNull.Value, dbType: DbType.String);
-            args.Add(name: "@Senha", value: (object)password ?? DBNull.Value, dbType: DbType.Int32);
+            args.Add(name: "@Senha", value: (object)password ?? DBNull.Value, dbType: DbType.String);
             return await WithConnection(async conn =>
             {
                 var query = await conn.QueryFirstOrDefaultAsync<Usuario>("SP_SEL_USUARIO_VERIFICA_ACESSO @Login, @Senha", args);

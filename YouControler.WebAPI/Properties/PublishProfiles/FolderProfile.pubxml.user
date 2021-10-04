@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\__Published\WebAPI</_PublishTargetUrl>
+    <History>True|2021-10-02T02:20:11.8608523Z;True|2021-10-01T23:18:51.8635336-03:00;True|2021-10-01T23:11:42.5589547-03:00;True|2021-10-01T15:19:45.3481618-03:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+</Project>
