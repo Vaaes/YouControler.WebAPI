@@ -12,5 +12,6 @@ namespace YouControler.WebAPI.Services.Interfaces
         Task RemoveDepartamento(int id);
         Task<IEnumerable<Departamento>> GetAllDepartamentos();
         Task<IEnumerable<Departamento>> GetCargoName(string nome);
+        Task<IEnumerable<Departamento>> GetCargoByGestorDepartamento(string GestorDepartamento);
     }
 }

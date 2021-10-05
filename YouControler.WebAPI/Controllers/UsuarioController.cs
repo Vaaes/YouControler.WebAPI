@@ -35,6 +35,15 @@ namespace YouControler.WebAPI.Controllers
             return Ok(product);
         }
 
+        [HttpGet]
+        [Route("GetVerificaPerfil")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarioById(int IdNivelAcesso)
+        {
+            var product = await _usuarioRepository.GetVerificaPerfil(IdNivelAcesso);
+            return Ok(product);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddUsuario([FromBody] Usuario entity)

@@ -58,6 +58,19 @@ namespace YouControler.WebAPI.Services
                 return query;
             });
         }
+        
+
+        public async Task<IEnumerable<Usuario>> GetVerificaPerfil(int IdNivelAcesso)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@IdNivelAcesso", value: (object)IdNivelAcesso ?? DBNull.Value, dbType: DbType.Int32);
+
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Usuario>("SP_SEL_USUARIO_VERIFICA_PERFIL @IdNivelAcesso", args);
+                return query;
+            });
+        }
 
         public async Task RemoveUsuario(int id)
         {

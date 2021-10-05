@@ -33,6 +33,17 @@ namespace YouControler.WebAPI.Services
                 var query = await conn.QueryAsync<Departamento>("SP_SEL_DEPARTAMENTO");
                 return query;
             });
+        }   
+
+        public async Task<IEnumerable<Departamento>> GetCargoByGestorDepartamento(string GestorDepartamento)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@GestorDepartamento", value: (object)GestorDepartamento ?? DBNull.Value, dbType: DbType.String);
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Departamento>("SP_SEL_DEPARTAMENTO_VERIFICA_FUNCIONARIO @GestorDepartamento", args);
+                return query;
+            });
         }
 
         public async Task<IEnumerable<Departamento>> GetCargoName(string nome)

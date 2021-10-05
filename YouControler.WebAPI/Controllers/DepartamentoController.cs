@@ -42,6 +42,15 @@ namespace YouControler.WebAPI.Controllers
             var product = await _departamentoRepository.GetCargoName(Nome);
             return Ok(product);
         }
+        [HttpGet]
+        [Route("GetCargoByGestorDepartamento")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Departamento>>> GetCargoByGestorDepartamento(string NomeGerente)
+        {
+            var product = await _departamentoRepository.GetCargoByGestorDepartamento(NomeGerente);
+            return Ok(product);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddDepartamento([FromBody] Departamento entity)
