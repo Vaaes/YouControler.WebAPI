@@ -72,6 +72,18 @@ namespace YouControler.WebAPI.Services
             });
         }
 
+        public async Task<IEnumerable<Usuario>> GetVerificaSenha(int id)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
+
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Usuario>("SP_SEL_VERIFICA_SENHA @Id", args);
+                return query;
+            });
+        }
+
         public async Task RemoveUsuario(int id)
         {
             var args = new DynamicParameters(new { });
@@ -79,6 +91,18 @@ namespace YouControler.WebAPI.Services
             await WithConnection(async conn =>
             {
                 await conn.ExecuteAsync("SP_DEL_USUARIO @ID", args);
+            });
+        }
+
+        public async Task UpdatePassword(int id, string pass)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
+            args.Add(name: "@Senha", value: (object)pass ?? DBNull.Value, dbType: DbType.String);
+
+            await WithConnection(async conn =>
+            {
+                await conn.ExecuteAsync("SP_UPD_SENHA @Id, @Senha", args);
             });
         }
 

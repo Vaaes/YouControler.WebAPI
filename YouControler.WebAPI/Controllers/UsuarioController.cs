@@ -44,6 +44,15 @@ namespace YouControler.WebAPI.Controllers
             return Ok(product);
         }
 
+        [HttpGet]
+        [Route("GetVerificaSenha")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarioVerificaSenha(int Id)
+        {
+            var product = await _usuarioRepository.GetVerificaSenha(Id);
+            return Ok(product);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddUsuario([FromBody] Usuario entity)
@@ -58,6 +67,15 @@ namespace YouControler.WebAPI.Controllers
         {
             await _usuarioRepository.UpdateUsuario(entity);
             return Ok(entity);
+        }
+
+        [HttpPut]
+        [Route("ChangePassword")]
+        [Authorize]
+        public async Task<ActionResult<Usuario>> UpdatePassword([FromBody] Usuario entity)
+        {
+            await _usuarioRepository.UpdatePassword(entity.Id, entity.Senha);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

@@ -8,8 +8,10 @@ namespace YouControler.WebAPI.Services.Interfaces
     {
         Task<IEnumerable<Usuario>> GetUsuarioById(int? id = null, string nome = null, int? IdNivelAcesso = null, string cpf = null, string email = null, string usuario = null);
         Task<IEnumerable<Usuario>> GetVerificaPerfil(int id);
+        Task<IEnumerable<Usuario>> GetVerificaSenha(int id);
         Task AddUsuario(Usuario entity);
         Task UpdateUsuario(Usuario entity);
+        Task UpdatePassword(int id, string pass);
         Task RemoveUsuario(int id);
         Task<IEnumerable<Usuario>> GetAllUsuario();
     }
