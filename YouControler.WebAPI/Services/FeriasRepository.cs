@@ -36,6 +36,18 @@ namespace YouControler.WebAPI.Services
             });
         }
 
+        public async Task<IEnumerable<Ferias>> GetAprovacao(int Aprovado)
+        {
+            var args = new DynamicParameters(new { });
+            args.Add(name: "@Aprovado", value: Aprovado, dbType: DbType.Int32);
+
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Ferias>("SP_SEL_FERIAS_APROVADOS @Aprovado", args);
+                return query;
+            });
+        }
+
         public async Task<IEnumerable<Ferias>> GetFeriasByParam(string Data_Inicio = null, string Data_Final = null, int? Id = null, int? IdUsuario = null, bool? Aprovado = null)
         {
             try
@@ -67,6 +79,25 @@ namespace YouControler.WebAPI.Services
             {
                 await conn.ExecuteAsync("SP_DEL_FERIAS @Id", args);
             });
+        }
+
+        public async Task UpdateAprovaFerias(int id, int Aprovado)
+        {
+            try
+            {
+                var args = new DynamicParameters(new { });
+                args.Add(name: "@Id", value: id, dbType: DbType.Int32);
+                args.Add(name: "@Aprovado", value: Aprovado, dbType: DbType.Int32);
+
+                await WithConnection(async conn =>
+                {
+                    await conn.ExecuteAsync("SP_UPD_APROVA_FERIAS @Id, @Aprovado", args);
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task UpdateFerias(Ferias entity)

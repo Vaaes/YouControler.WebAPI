@@ -36,6 +36,15 @@ namespace YouControler.WebAPI.Controllers
             return Ok(product);
         }
 
+        [HttpGet]
+        [Route("GetAprovacao")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Ferias>>> GetAprovacao(int aprovado)
+        {
+            var product = await _feriasRepository.GetAprovacao(aprovado);
+            return Ok(product);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> AddFerias([FromBody] Ferias entity)
@@ -50,6 +59,15 @@ namespace YouControler.WebAPI.Controllers
         {
             await _feriasRepository.UpdateFerias(entity);
             return Ok(entity);
+        }
+
+        [HttpPut]
+        [Route("AprovarFerias")]
+        [Authorize]
+        public async Task<ActionResult<Ferias>> UpdateAprovaFerias([FromBody] Ferias entity)
+        {
+            await _feriasRepository.UpdateAprovaFerias(entity.IdUsuario, entity.Aprovacao);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

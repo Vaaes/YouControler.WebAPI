@@ -10,5 +10,6 @@ namespace YouControler.WebAPI.Model
         public int IdUsuario { get; set; }
         public bool Aprovado { get; set; }
         public string Nome { get; set; }
+        public int Aprovacao { get; set; }
     }
 }
