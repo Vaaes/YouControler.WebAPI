@@ -29,9 +29,9 @@ namespace YouControler.WebAPI.Controllers
         [HttpGet]
         [Route("GetCandidatosByParam")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Candidatos>>> GetCandidatosByParam(int? id = null, string NomeCandidato = null, int? IdadeCandidato = null, string EmailCandidato = null, string TelefoneCandidato = null, int? IdVaga = null)
+        public async Task<ActionResult<IEnumerable<Candidatos>>> GetCandidatosByParam(string NomeCandidato = null, string EmailCandidato = null)
         {
-            var product = await _candidatoRepository.GetCandidatosByParam(id, NomeCandidato, IdadeCandidato, EmailCandidato, TelefoneCandidato, IdVaga);
+            var product = await _candidatoRepository.GetCandidatosByParam(NomeCandidato, EmailCandidato);
             return Ok(product);
         }
 

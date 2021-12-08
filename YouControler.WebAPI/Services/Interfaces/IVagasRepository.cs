@@ -9,7 +9,7 @@ namespace YouControler.WebAPI.Services.Interfaces
     public interface IVagasRepository
     {
         Task<IEnumerable<Vagas>> GetVagasById(int id);
-        Task<IEnumerable<Vagas>> GetVagasByParam(int? id = null, string NomeVaga = null, string DataMaxima = null, string PerfilVaga = null);
+        Task<IEnumerable<Vagas>> GetVagasByParam(string NomeVaga = null);
         Task AddVaga(Vagas entity);
         Task<IEnumerable<Vagas>> GetAllVagas();
         Task UpdateVaga(Vagas entity);

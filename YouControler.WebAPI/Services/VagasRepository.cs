@@ -48,19 +48,16 @@ namespace YouControler.WebAPI.Services
             });
         }
 
-        public async Task<IEnumerable<Vagas>> GetVagasByParam(int? id = null, string NomeVaga = null, string DataMaxima = null, string PerfilVaga = null)
+        public async Task<IEnumerable<Vagas>> GetVagasByParam(string NomeVaga = null)
         {
             try
             {
                 var args = new DynamicParameters(new { });
-                args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
                 args.Add(name: "@NomeVaga", value: (object)NomeVaga ?? DBNull.Value, dbType: DbType.String);
-                args.Add(name: "@DataMaxima", value: (object)DataMaxima ?? DBNull.Value, dbType: DbType.String);
-                args.Add(name: "@PerfilVaga", value: (object)PerfilVaga ?? DBNull.Value, dbType: DbType.String);
 
                 return await WithConnection(async conn =>
                 {
-                    var query = await conn.QueryAsync<Vagas>("SP_SEL_VAGAS @Id, @NomeVaga, @DataMaxima, @PerfilVaga", args);
+                    var query = await conn.QueryAsync<Vagas>("SP_SEL_VAGAS @NomeVaga", args);
                     return query;
                 });
             }

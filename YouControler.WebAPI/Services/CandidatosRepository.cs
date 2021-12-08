@@ -50,21 +50,17 @@ namespace YouControler.WebAPI.Services
             });
         }
 
-        public async Task<IEnumerable<Candidatos>> GetCandidatosByParam(int? id = null, string NomeCandidato = null, int? IdadeCandidato = null, string EmailCandidato = null, string TelefoneCandidato = null, int? IdVaga = null)
+        public async Task<IEnumerable<Candidatos>> GetCandidatosByParam(string NomeCandidato = null, string EmailCandidato = null)
         {
             try
             {
                 var args = new DynamicParameters(new { });
-                args.Add(name: "@Id", value: (object)id ?? DBNull.Value, dbType: DbType.Int32);
                 args.Add(name: "@NomeCandidato", value: (object)NomeCandidato ?? DBNull.Value, dbType: DbType.String);
-                args.Add(name: "@IdadeCandidato", value: (object)IdadeCandidato ?? DBNull.Value, dbType: DbType.Int32);
                 args.Add(name: "@EmailCandidato", value: (object)EmailCandidato ?? DBNull.Value, dbType: DbType.String);
-                args.Add(name: "@TelefoneCandidato", value: (object)TelefoneCandidato ?? DBNull.Value, dbType: DbType.String);
-                args.Add(name: "@IdVaga", value: (object)IdVaga ?? DBNull.Value, dbType: DbType.Int32);
 
                 return await WithConnection(async conn =>
                 {
-                    var query = await conn.QueryAsync<Candidatos>("SP_SEL_CANDIDADATOS @Id, @NomeCandidato, @IdadeCandidato, @EmailCandidato, @TelefoneCandidato, @IdVaga", args);
+                    var query = await conn.QueryAsync<Candidatos>("SP_SEL_CANDIDADATOS @NomeCandidato, @EmailCandidato", args);
                     return query;
                 });
             }

@@ -29,9 +29,9 @@ namespace YouControler.WebAPI.Controllers
         [HttpGet]
         [Route("GetVagasByParam")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Vagas>>> GetVagasByParam(int? id = null, string NomeVaga = null, string DataMaxima = null, string PerfilVaga = null)
+        public async Task<ActionResult<IEnumerable<Vagas>>> GetVagasByParam(string NomeVaga = null)
         {
-            var product = await _vagasRepository.GetVagasByParam(id, NomeVaga, DataMaxima, PerfilVaga);
+            var product = await _vagasRepository.GetVagasByParam(NomeVaga);
             return Ok(product);
         }
 

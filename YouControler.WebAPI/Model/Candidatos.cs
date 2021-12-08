@@ -13,5 +13,6 @@ namespace YouControler.WebAPI.Model
         public string EmailCandidato { get; set; }
         public string TelefoneCandidato { get; set; }
         public int IdVaga { get; set; }
+        public string NomeVaga { get; set; }
     }
 }

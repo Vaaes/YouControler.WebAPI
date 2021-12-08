@@ -38,6 +38,8 @@ namespace YouControler.WebAPI
             services.AddTransient<IPermissoesRepository, PermissoesRepository>();
             services.AddTransient<INivelAcessoRepository, NivelAcessoRepository>();
             services.AddTransient<IFuncionarioRepository, FuncionarioRepository>();
+            services.AddTransient<ICandidatosRepository, CandidatosRepository>();
+            services.AddTransient<IVagasRepository, VagasRepository>();
 
             services.AddCors();
 
